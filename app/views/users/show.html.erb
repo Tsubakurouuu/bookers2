@@ -1,3 +1,6 @@
+<div class = "container">
+  <div class="row">
+    <div class="col-lg-4">
 <div>
   <h1>User info</h1>
   <% if @user.profile_image.attached? %>
@@ -15,6 +18,7 @@
   <p><%= link_to "プロフィール編集", edit_user_path %></p>
 </div>
 
+
 <h1>New book</h1>
   <%= form_with model: @book do |f| %>
       <%= f.label :Title %><br>
@@ -23,11 +27,13 @@
       <%= f.text_area :opinion %><br>
     <%= f.submit 'Create Book' %>
   <% end %>
-
+  </div>
+<div class="col-lg-8">
 <h1>Books</h1>
 <table>
   <thead>
     <tr>
+      <th></th>
       <th>Title</th>
       <th>Opinion</th>
     </tr>
@@ -35,9 +41,13 @@
   <tbody>
     <% @books.each do |book| %>
       <tr>
+        <td><%= image_tag @user.profile_image, size: "80x80" %></td>
         <td><%= link_to book.title, book %></td>
         <td><%= book.opinion %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
+</div>
+</div>

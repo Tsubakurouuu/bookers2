@@ -1,24 +1,49 @@
+<%= notice %>
+<div class = "container">
+  <div class="row">
+    <div class="col-lg-4">
+<h1>User info</h1>
+        <% if @user.profile_image.attached? %>
+          <%= image_tag @user.profile_image, size: "100x100" %>
+        <% else %>
+          <%= image_tag 'no_image', size: "100x100" %>
+        <% end %>
+        <table>
+          <tr><th>name</th>
+          <tr><td><%= @user.name %></td></tr><br>
+
+          <th>introduction</th></tr>
+          <tr><td><%= @user.introduction %></td></tr><br>
+        </table>
+        <p><%= link_to "プロフィール編集", edit_user_path(@user.id) %></p>
+
+
+
 <h1>New book</h1>
   <%= form_with model: @book do |f| %>
       <%= f.label :Title %><br>
       <%= f.text_field :title %><br><br>
       <%= f.label :Opinion %><br>
       <%= f.text_area :opinion %><br>
-    <%= f.submit 'Create Book' %>
+      <%= f.submit 'Create Book' %>
   <% end %>
-  
+  </div>
+<div class="coi-lg-8">
 <h1>Book detail</h1>
 <table>
   <thead>
-    <tr>
-      <th>Title</th>
-      <th>Opinion</th>
-    </tr>
   </thead>
   <tbody>
       <tr>
+        <td><%= image_tag @book.user.get_profile_image(80,80) %></td>
+            
         <td><%= @book.title %></td>
         <td><%= @book.opinion %></td>
+        <td><%= link_to 'Edit', edit_book_path(@book) %></td>
+        <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' } %></td>
       </tr>
   </tbody>
 </table>
+</div>
+</div>
+</div>

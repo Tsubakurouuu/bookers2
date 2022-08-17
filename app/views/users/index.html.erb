@@ -1,6 +1,6 @@
 <div class = "container">
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-md-4">
 <h1>User info</h1>
         <% if @user.profile_image.attached? %>
           <%= image_tag @user.profile_image, size: "100x100" %>
@@ -14,7 +14,11 @@
           <th>introduction</th></tr>
           <tr><td><%= @user.introduction %></td></tr><br>
         </table>
-        <p><%= link_to "プロフィール編集", edit_user_path(@user.id) %></p>
+        <p>
+          <%= link_to edit_user_path(@user.id), class: 'nav-list' do %>
+            <i class="fas fa-user-cog"></i>
+          <% end %>
+        </p>
 
 
 <h1>New book</h1>
@@ -22,11 +26,11 @@
       <%= f.label :Title %><br>
       <%= f.text_field :title %><br><br>
       <%= f.label :Opinion %><br>
-      <%= f.text_area :opinion %><br>
+      <%= f.text_area :body %><br>
     <%= f.submit 'Create Book' %>
   <% end %>
   </div>
-<div class="col-lg-8">
+<div class="col-md-8">
 <h1>Users</h1>
 <table>
   <thead>

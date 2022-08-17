@@ -1,6 +1,11 @@
+<% if flash[:notice] %>
+     <p id="notice">
+       <%= flash[:notice] %>
+     </p>
+  <% end %>
 <div class = "container">
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-md-4">
 <div>
   <h1>User info</h1>
   <% if @user.profile_image.attached? %>
@@ -15,7 +20,19 @@
   <th>introduction</th></tr>
   <tr><td><%= @user.introduction %></td></tr><br>
   </table>
-  <p><%= link_to "プロフィール編集", edit_user_path %></p>
+  <% if @user == current_user %>
+    <p>
+    <%= link_to edit_user_path, class: 'nav-list' do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
+    </p>
+  <% else %>
+    <p>
+    <%= link_to user_path(current_user.id), class: 'nav-list' do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
+    </p>
+  <% end %>
 </div>
 
 
@@ -24,11 +41,11 @@
       <%= f.label :Title %><br>
       <%= f.text_field :title %><br><br>
       <%= f.label :Opinion %><br>
-      <%= f.text_area :opinion %><br>
+      <%= f.text_area :body %><br>
     <%= f.submit 'Create Book' %>
   <% end %>
   </div>
-<div class="col-lg-8">
+<div class="col-md-8">
 <h1>Books</h1>
 <table>
   <thead>
@@ -41,9 +58,13 @@
   <tbody>
     <% @books.each do |book| %>
       <tr>
-        <td><%= image_tag @user.profile_image, size: "80x80" %></td>
+        <td>
+          <%= link_to user_path(book.user_id) do %>
+            <%= image_tag book.user.get_profile_image(80,80) %>
+          <% end %>
+        </td>
         <td><%= link_to book.title, book %></td>
-        <td><%= book.opinion %></td>
+        <td><%= book.body %></td>
       </tr>
     <% end %>
   </tbody>

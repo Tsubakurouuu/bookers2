@@ -1,6 +1,6 @@
 <div class = "container">
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-md-3">
 <h1>User info</h1>
         <% if @user.profile_image.attached? %>
           <%= image_tag @user.profile_image, size: "100x100" %>
@@ -30,7 +30,7 @@
     <%= f.submit 'Create Book' %>
   <% end %>
   </div>
-<div class="col-lg-8">
+<div class="col-md-8 offset-md-1">
 <h1>Users</h1>
 <table class = "table">
   <thead>

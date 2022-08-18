@@ -1,8 +1,3 @@
-<% if flash[:notice] %>
-     <p id="notice">
-       <%= flash[:notice] %>
-     </p>
-  <% end %>
 <% if @book.errors.any? %>
   <%= @book.errors.count %> errors prohibited this book from being saved:
   <ul>
@@ -13,33 +8,23 @@
 <% end %>
 <div class = "container">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-lg-4">
 <h1>User info</h1>
         <% if @book.user.profile_image.attached? %>
           <%= image_tag @book.user.profile_image, size: "100x100" %>
         <% else %>
           <%= image_tag 'no_image', size: "100x100" %>
         <% end %>
-        <table>
-          <tr><th>name</th>
-          <tr><td><%= @book.user.name %></td></tr><br>
+        <table class = "table">
+          <tr class = "row"><th class = "col-md-6">name</th>
+          <td><%= @book.user.name %></td></tr><br>
 
-          <th>introduction</th></tr>
-          <tr><td><%= @book.user.introduction %></td></tr><br>
+          <tr class="row"><th class = "col-md-6">introduction</th>
+          <td><%= @book.user.introduction %></td></tr><br>
         </table>
-        <% if @book.user == current_user %>
-          <p>
-            <%= link_to edit_user_path, class: 'nav-list' do %>
+            <%= link_to edit_user_path(@book.user), class: 'nav-list' do %>
               <i class="fas fa-user-cog"></i>
             <% end %>
-          </p>
-        <% else %>
-          <p>
-            <%= link_to user_path(current_user.id), class: 'nav-list' do %>
-              <i class="fas fa-user-cog"></i>
-            <% end %>
-          </p>
-        <% end %>
 
 
 <h1>New book</h1>
@@ -51,24 +36,25 @@
       <%= f.submit 'Create Book' %>
   <% end %>
   </div>
-<div class="coi-md-8">
+<div class="col-lg-8">
 <h1>Book detail</h1>
-<table>
+<table class = "table">
   <thead>
   </thead>
   <tbody>
       <tr>
-        <td>
+        <td class = "col-md-4">
           <%= link_to user_path(@book.user_id) do %>
             <%= image_tag @book.user.get_profile_image(80,80) %>
           <% end %>
+           <div class="row"><%= link_to @book.user.name, user_path(@book.user.id) %></div>
         </td>
-            <%= link_to @book.user.name, user_path(@book.user.id) %>
-        <td><%= link_to @book.title %></td>
-        <td><%= @book.body %></td>
+           
+        <td class = "col-md-2"><%= link_to @book.title %></td>
+        <td class = "col-md-2"><%= @book.body %></td>
         <% if @book.user == current_user %>
-          <td><%= link_to 'Edit', edit_book_path(@book) %></td>
-          <td><%= link_to 'Destroy', book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+          <td class = "col-md-2"><%= link_to 'Edit', edit_book_path(@book) %></td>
+          <td class = "col-md-2"><%= link_to 'Destroy', book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
         <% end %>
       </tr>
   </tbody>

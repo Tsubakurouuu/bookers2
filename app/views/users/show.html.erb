@@ -1,74 +1,59 @@
-<% if flash[:notice] %>
-     <p id="notice">
-       <%= flash[:notice] %>
-     </p>
-  <% end %>
 <div class = "container">
   <div class="row">
     <div class="col-md-4">
-<div>
-  <h1>User info</h1>
-  <% if @user.profile_image.attached? %>
-    <%= image_tag @user.profile_image, size: "100x100" %>
-  <% else %>
-    <%= image_tag 'no_image', size: "100x100" %>
-  <% end %>
-  <table>
-  <tr><th>name</th>
-  <tr><td><%= @user.name %></td></tr><br>
+      <h1>User info</h1>
+      <% if @user.profile_image.attached? %>
+        <%= image_tag @user.profile_image, size: "100x100" %>
+      <% else %>
+        <%= image_tag 'no_image', size: "100x100" %>
+      <% end %>
+      <table class = "table">
+        <tr class = "row"><th class = "col-md-6">name</th>
+        <td><%= @user.name %></td></tr><br>
 
-  <th>introduction</th></tr>
-  <tr><td><%= @user.introduction %></td></tr><br>
-  </table>
-  <% if @user == current_user %>
-    <p>
-    <%= link_to edit_user_path, class: 'nav-list' do %>
-      <i class="fas fa-user-cog"></i>
-    <% end %>
-    </p>
-  <% else %>
-    <p>
-    <%= link_to user_path(current_user.id), class: 'nav-list' do %>
-      <i class="fas fa-user-cog"></i>
-    <% end %>
-    </p>
-  <% end %>
-</div>
+        <tr class = "row"><th class = "col-md-6">introduction</th>
+        <td><%= @user.introduction %></td></tr><br>
+      </table>
+
+        <%= link_to edit_user_path, class: 'nav-list' do %>
+        <i class="fas fa-user-cog"></i>
+        <% end %>
 
 
-<h1>New book</h1>
-  <%= form_with model: @book do |f| %>
+
+      <h1>New book</h1>
+      <%= form_with model: @book do |f| %>
       <%= f.label :Title %><br>
       <%= f.text_field :title %><br><br>
       <%= f.label :Opinion %><br>
       <%= f.text_area :body %><br>
-    <%= f.submit 'Create Book' %>
-  <% end %>
-  </div>
-<div class="col-md-8">
-<h1>Books</h1>
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>Title</th>
-      <th>Opinion</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @books.each do |book| %>
-      <tr>
-        <td>
-          <%= link_to user_path(book.user_id) do %>
-            <%= image_tag book.user.get_profile_image(80,80) %>
+      <%= f.submit 'Create Book' %>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+        <h1>Books</h1>
+        <table class = "table">
+            <thead>
+              <tr>
+                  <th class = "col-md-4"></th>
+                  <th class = "col-md-4">Title</th>
+                  <th class = "col-me-4">Opinion</th>
+              </tr>
+            </thead>
+          <tbody>
+          <% @books.each do |book| %>
+            <tr>
+              <td>
+                <%= link_to user_path(book.user_id) do %>
+                <%= image_tag book.user.get_profile_image(80,80) %>
           <% end %>
-        </td>
-        <td><%= link_to book.title, book %></td>
-        <td><%= book.body %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</div>
-</div>
+              </td>
+              <td><%= link_to book.title, book %></td>
+              <td><%= book.body %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+    </div>
+  </div>
 </div>

@@ -1,14 +1,16 @@
 
-　<div class="container text-cencter">
-  <div class="row">
+　<div class="container">
+　  <div class="row">
+　    <div class="col-md-6 mx-auto">
     <h1>welcome to <i class="fas fa-book"></i>Bookers!!</h1>
-  </div>
-  <div class="row">
     <p>In <i class="fas fa-book"></i>Bookers,<br>you can share and exchange your opinions , inpressions , and emotions<br>about various books!</p>
-  </div>
-  <div class="row">
-    <%= link_to "Log in", new_user_session_path %>
-  </div>
-  <div class="row">
-    <%= link_to "Sign up", new_user_registration_path %>
+  
+    <div class="row">
+      <%= link_to "Log in", new_user_session_path, class:"col-md-10 mx-auto btn btn-info btn-sm btn-block mb-3 sign_in" %>
+    </div>
+    <div class="row">
+      <%= link_to "Sign up", new_user_registration_path, class:"col-md-10 mx-auto btn btn-success btn-sm btn-block sign_up" %>
+    </div>
+      </div>
+      </div>
   </div>
